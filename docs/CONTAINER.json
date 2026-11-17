@@ -1,0 +1,8 @@
+{
+  "repository": "pytorch/pytorch",
+  "tag": "2.8.0-cuda12.6-cudnn9-devel",
+  "digest": "sha256:adb0f2d3769e0796a5d86740b0f900a72835b6fa9577b77d6efed460f1322fcb",
+  "uri": "docker://pytorch/pytorch@sha256:adb0f2d3769e0796a5d86740b0f900a72835b6fa9577b77d6efed460f1322fcb",
+  "verified_date": "2026-11-18",
+  "media_type": "application/vnd.docker.distribution.manifest.v2+json"
+}

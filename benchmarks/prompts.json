@@ -1,0 +1,18 @@
+[
+  "Explain KV caching in a transformer decoder with a small example.",
+  "Write a Python function that merges two sorted lists. Explain its complexity.",
+  "A train travels 180 km in 3 hours. How far will it travel in 5 hours at the same speed?",
+  "Describe why a rainbow forms after rain.",
+  "Write an iterative binary search in Python and explain edge cases.",
+  "Explain the difference between a mutex and a semaphore.",
+  "Continue this story: The old observatory received a signal that had been silent for fifty years.",
+  "Prove that the sum of the first n odd positive integers is n squared.",
+  "Explain how a CPU cache differs from main memory.",
+  "Implement a Python LRU cache using collections.OrderedDict.",
+  "A rectangle has perimeter 30 and width 5. Find its area and show the steps.",
+  "Describe how plants convert sunlight into stored energy.",
+  "Write a Python generator for prime numbers less than a given limit.",
+  "Explain why database transactions use isolation levels.",
+  "Continue this story: Under the frozen lake, a clock began to strike midnight.",
+  "Explain the pigeonhole principle and give a concrete example."
+]

@@ -1,0 +1,223 @@
+{
+  "schema_version": 2,
+  "job": {
+    "method": "dflash",
+    "target": "<RUN_ROOT>/models/Qwen3-8B",
+    "drafts": {
+      "naive": "<RUN_ROOT>/models/Qwen3-0.6B",
+      "dflash": "<RUN_ROOT>/models/dflash_qwen3_8b_block7",
+      "dspark": "<RUN_ROOT>/models/dspark_qwen3_8b_block7",
+      "jetspec": "<RUN_ROOT>/models/jetspec-qwen3-8b"
+    },
+    "prompts": "<RUN_ROOT>/benchmarks/inputs/speed-128.json",
+    "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2",
+    "concurrency": 8,
+    "seed": 29,
+    "repeat": 1,
+    "naive_k": 7,
+    "tree_width": 4,
+    "tree_budget": 32,
+    "max_tokens": 256,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 16384,
+    "target_kv_bytes": 17179869184,
+    "draft_kv_bytes": 8589934592,
+    "eager": true,
+    "warmup": 1,
+    "load": "closed",
+    "num_requests": 128,
+    "arrival_rate": 1.0,
+    "slo_ttft_ms": 1000,
+    "slo_tpot_ms": 50,
+    "slo_gap_ms": 100
+  },
+  "status": "ok",
+  "environment": {
+    "python": "3.11.18",
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "cuda": "12.8",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "platform": "Linux-5.14.0-611.55.1.el9_7.0.3.x86_64-x86_64-with-glibc2.34",
+    "flash-attn": "2.8.3",
+    "triton": "3.6.0",
+    "nvidia_smi": "NVIDIA A100-SXM4-80GB, <GPU_UUID>, 595.112.07, 400.00 W"
+  },
+  "wall_seconds": 76.82696033500542,
+  "metrics": {
+    "request_count": 128,
+    "requests_s": 1.6660817952689206,
+    "latency_ms": {
+      "count": 128,
+      "mean": 4584.147730437962,
+      "p50": 4598.903462494491,
+      "p95": 7554.695213351079,
+      "p99": 8631.792163489012,
+      "max": 9214.19838500151
+    },
+    "ttft_ms": {
+      "count": 128,
+      "mean": 105.00123467943467,
+      "p50": 75.45675650180783,
+      "p95": 509.37402399722487,
+      "p99": 509.37402399722487,
+      "max": 509.37402399722487
+    },
+    "queue_ms": {
+      "count": 128,
+      "mean": 0.03330082756747288,
+      "p50": 0.02661000326042995,
+      "p95": 0.12279099610168487,
+      "p99": 0.12279099610168487,
+      "max": 0.12279099610168487
+    },
+    "tpot_ms": {
+      "count": 128,
+      "mean": 17.56528037552364,
+      "p50": 17.486176403940142,
+      "p95": 29.325439971768954,
+      "p99": 33.45478390230554,
+      "max": 35.802890968625434
+    },
+    "delivery_gap_ms": {
+      "count": 12168,
+      "mean": 47.11791185544802,
+      "p50": 41.992919497715775,
+      "p95": 114.30753499735147,
+      "p99": 118.59318400092889,
+      "max": 184.23213499772828
+    },
+    "delivery_tokens": {
+      "count": 12296,
+      "mean": 2.664931685100846,
+      "p50": 2.0,
+      "p95": 7.0,
+      "p99": 8.0,
+      "max": 8
+    },
+    "steady_seconds": 70.88250582999899,
+    "steady_tokens": 31792,
+    "steady_tok_s": 448.5168749006747,
+    "decode_step_tok_s": 484.5454176385183,
+    "committed_decode_tokens": 32640,
+    "committed_tokens_per_sequence_round": 2.6824457593688362,
+    "slo": {
+      "ttft_ms": 1000,
+      "tpot_ms": 50,
+      "gap_ms": 100
+    },
+    "goodput_requests_s": 0.026032528051076885,
+    "goodput_tokens_s": 6.664327181075683,
+    "preemptions": 0,
+    "recomputed_tokens": 0,
+    "peak_target_blocks": 44,
+    "peak_draft_blocks": 0,
+    "target_block_capacity": 455,
+    "draft_block_capacity": 0,
+    "scheduler_seconds": 0.023007975905784406,
+    "phase_ms": {
+      "propose": {
+        "count": 1605,
+        "mean": 6.427862889001674,
+        "p50": 6.466432094573975,
+        "p95": 6.534105587005615,
+        "p99": 6.607397136688233,
+        "max": 7.093408107757568
+      },
+      "verify": {
+        "count": 1605,
+        "mean": 33.22742951413924,
+        "p50": 33.20115280151367,
+        "p95": 33.48664245605469,
+        "p99": 33.82972351074219,
+        "max": 38.019073486328125
+      },
+      "ctx_store": {
+        "count": 1605,
+        "mean": 1.1836923228617398,
+        "p50": 1.1776000261306763,
+        "p95": 1.2255232334136963,
+        "p99": 1.279959011077881,
+        "max": 1.7203199863433838
+      },
+      "accept": {
+        "count": 1605,
+        "mean": 0.9618167252184074,
+        "p50": 0.9676799774169922,
+        "p95": 0.9820160269737244,
+        "p99": 1.009541177749634,
+        "max": 1.1816960573196411
+      },
+      "commit_copy": {
+        "count": 1605,
+        "mean": 0.0494795364568538,
+        "p50": 0.04652800038456917,
+        "p95": 0.07836800068616867,
+        "p99": 0.08658048361539841,
+        "max": 0.19475199282169342
+      }
+    },
+    "verified_positions_per_committed_token": 2.9823529411764707,
+    "phase_us_per_committed_token": {
+      "propose": 316.07597845734335,
+      "verify": 1633.8855505573983,
+      "ctx_store": 58.20545889071974,
+      "accept": 47.29521580807426,
+      "commit_copy": 2.4330470592294837
+    },
+    "accepted_prefix_survival": [
+      0.6504766600920447,
+      0.4094345825115056,
+      0.24597304404996712,
+      0.15869493754109137,
+      0.1086456278763971,
+      0.07437541091387245,
+      0.05193951347797501
+    ]
+  },
+  "profiled": false,
+  "checkpoint_sources": {
+    "target": {
+      "repo": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "directory": "Qwen3-8B"
+    },
+    "draft": {
+      "repo": "deepseek-ai/dflash_qwen3_8b_block7",
+      "revision": "9e44dbbb6cb68b0c943abf9c5fc3c17c00897cdf",
+      "directory": "dflash_qwen3_8b_block7"
+    }
+  },
+  "checkpoint_config_sha256": {
+    "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "draft": "9d7a9ab2be15452877bda2a335542c7c6ee500fc986c05a4b9ea5fba95fbf914"
+  },
+  "source_sha256": "b1cb407c2893bc1462ad5b3558dfd4c89b720dcb31e2e5de1fc756aeffb8bae7",
+  "benchmark_source_sha256": "b8478c1e972f526d015cb41935720e935dff336043db387622905234be82a57b",
+  "output_tokens": 32768,
+  "wall_tok_s": 426.5169395888437,
+  "peak_allocated_bytes": 41906724352,
+  "peak_reserved_bytes": 42274390016,
+  "accepted_drafts": 20680,
+  "sequence_rounds": 12168,
+  "acceptance_rate": 0.24279139663755048,
+  "tokens_per_round_before_stop": 2.6995397764628533,
+  "num_speculative_tokens": 7,
+  "stats": {
+    "accepted_2": 1989,
+    "accepted_1": 2933,
+    "accepted_0": 4253,
+    "rounds": 1605,
+    "proposed_tokens": 85176,
+    "verified_positions": 97344,
+    "accepted_7": 632,
+    "accepted_5": 417,
+    "accepted_3": 1062,
+    "accepted_4": 609,
+    "accepted_6": 273
+  },
+  "source_file_sha256": "71af6423b794cd7f3933f7c07f60468a9f401a44bd282f46987262d93f8435cd"
+}

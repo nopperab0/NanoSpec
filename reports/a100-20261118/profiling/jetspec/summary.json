@@ -1,0 +1,64 @@
+{
+  "captured_steps": 8,
+  "window_ms": 815.0532280273437,
+  "kernel_launches": 8740,
+  "kernel_sum_ms": 156.08587700000064,
+  "device_active_union_ms": 157.758013671875,
+  "device_activity_coverage_pct": 19.355547373721027,
+  "memcpy_events": 1348,
+  "host_sync_calls": 1197,
+  "host_sync_ms": 7.925793000000003,
+  "top_kernels": [
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_256x64_ldg8_f2f_stages_64x3_tn",
+      "calls": 584,
+      "kernel_ms": 61.85308700000004
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+      "calls": 656,
+      "kernel_ms": 23.19184300000001
+    },
+    {
+      "name": "fmha_cutlassF_bf16_aligned_64x128_rf_sm80(PyTorchMemEffAttention::AttentionKernel<cutlass::bfloat16_t, cutlass::arch::Sm80, true, 64, 128, 128, true, true>::Params)",
+      "calls": 288,
+      "kernel_ms": 22.263230999999976
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#12}::operator()() const::{lambda(c10::BFloat16)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#12}::operator()() const::{lambda(c10::BFloat16)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#12}::operator()() const::{lambda(c10::BFloat16)#1}>(at::TensorIteratorBase&, at::native::direct_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda()#3}::operator()() const::{lambda()#12}::operator()() const::{lambda(c10::BFloat16)#1} const&)::{lambda(int)#1})",
+      "calls": 796,
+      "kernel_ms": 11.078693000000005
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+      "calls": 56,
+      "kernel_ms": 7.992290999999999
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_64x3_tn",
+      "calls": 40,
+      "kernel_ms": 4.7611479999999995
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_0",
+      "calls": 1376,
+      "kernel_ms": 4.53827699999997
+    },
+    {
+      "name": "void at::native::vectorized_gather_kernel<16, long>(char*, char*, long*, int, long, long, long, long, bool)",
+      "calls": 592,
+      "kernel_ms": 2.6005050000000027
+    },
+    {
+      "name": "void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul> >(int, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul>)",
+      "calls": 756,
+      "kernel_ms": 1.3529859999999971
+    },
+    {
+      "name": "void at::native::elementwise_kernel<128, 4, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::where_kernel_impl(at::TensorIterator&)::{lambda()#1}::operator()() const::{lambda()#3}::operator()() const::{lambda(bool, c10::BFloat16, c10::BFloat16)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::where_kernel_impl(at::TensorIterator&)::{lambda()#1}::operator()() const::{lambda()#3}::operator()() const::{lambda(bool, c10::BFloat16, c10::BFloat16)#1} const&)::{lambda(int)#1}>(int, at::native::gpu_kernel_impl_nocast<at::native::(anonymous namespace)::where_kernel_impl(at::TensorIterator&)::{lambda()#1}::operator()() const::{lambda()#3}::operator()() const::{lambda(bool, c10::BFloat16, c10::BFloat16)#1}>(at::TensorIteratorBase&, at::native::(anonymous namespace)::where_kernel_impl(at::TensorIterator&)::{lambda()#1}::operator()() const::{lambda()#3}::operator()() const::{lambda(bool, c10::BFloat16, c10::BFloat16)#1} const&)::{lambda(int)#1})",
+      "calls": 288,
+      "kernel_ms": 1.2397610000000017
+    }
+  ],
+  "method": "jetspec"
+}

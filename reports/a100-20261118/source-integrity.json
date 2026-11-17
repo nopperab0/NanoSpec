@@ -1,0 +1,6 @@
+{
+  "published_engine_sha256": "b1cb407c2893bc1462ad5b3558dfd4c89b720dcb31e2e5de1fc756aeffb8bae7",
+  "measured_engine_sha256": "b1cb407c2893bc1462ad5b3558dfd4c89b720dcb31e2e5de1fc756aeffb8bae7",
+  "engine_matches": true,
+  "note": "Publication docs/tooling and benchmark CLI default seed list changed after submission; engine unchanged."
+}

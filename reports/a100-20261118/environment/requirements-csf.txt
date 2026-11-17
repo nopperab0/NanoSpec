@@ -1,0 +1,16 @@
+# Runtime tested locally on CPU; the CUDA environment is validated on the allocated node.
+torch==2.8.0
+triton==3.4.0
+transformers==4.57.6
+flash-attn==2.8.3
+xxhash==3.6.0
+numpy==2.2.6
+tqdm==4.67.1
+safetensors==0.6.2
+pytest==8.4.2
+huggingface-hub==0.36.0
+datasets==4.3.0
+ninja==1.13.0
+packaging==25.0
+setuptools==80.9.0
+wheel==0.45.1

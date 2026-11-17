@@ -1,0 +1,13 @@
+..s.s.s.s.s.s.s.s.s.s.s.s.s.s...................................sssss... [ 37%]
+....................................................... [ 66%]
+........................................s..ss.ss...............          [100%]
+=========================== short test summary info ===========================
+SKIPPED [5] tests\test_accept_random_multistep.py:79: no CUDA
+SKIPPED [9] tests\test_accept_random_multistep.py:91: no CUDA
+SKIPPED [1] tests\test_dflash_model.py:178: needs DFLASH_4B_DIR, DFLASH_8B_DIR, DEEPSPEC_DIR, TORCHDYNAMO_DISABLE
+SKIPPED [1] tests\test_dflash_model.py:187: needs DFLASH_4B_DIR, DFLASH_8B_DIR, DEEPSPEC_DIR, TORCHDYNAMO_DISABLE
+SKIPPED [1] tests\test_dflash_model.py:207: needs DFLASH_4B_DIR, DFLASH_8B_DIR, DEEPSPEC_DIR, TORCHDYNAMO_DISABLE
+SKIPPED [1] tests\test_dflash_model.py:216: needs DFLASH_4B_DIR, DFLASH_8B_DIR, DEEPSPEC_DIR, TORCHDYNAMO_DISABLE
+SKIPPED [1] tests\test_dflash_model.py:223: needs DFLASH_4B_DIR, DFLASH_8B_DIR, DEEPSPEC_DIR, TORCHDYNAMO_DISABLE
+SKIPPED [5] tests\test_spec_sampler.py:153: mismatch position beyond the draft length
+166 passed, 24 skipped, 89 subtests passed in 36.60s

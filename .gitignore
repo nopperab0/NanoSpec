@@ -1,0 +1,15 @@
+__pycache__/
+*.py[cod]
+.pytest_cache/
+*.egg-info/
+.venv/
+.runtime/
+.hf-cache/
+.csf-env/
+/results/
+/profiles/
+/models/
+build/
+dist/
+*.out
+benchmarks/inputs/

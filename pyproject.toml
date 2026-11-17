@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=77"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "nano-vllm-speculative-tutorial"
+version = "0.2.0"
+description = "Teach and compare naive, DFlash, DSpark and JetSpec decoding on nano-vLLM"
+requires-python = ">=3.10,<3.13"
+license = "MIT"
+license-files = ["LICENSE"]
+readme = "README.md"
+dependencies = ["torch>=2.6", "transformers>=4.57,<5", "xxhash", "numpy", "tqdm", "safetensors"]
+
+[project.optional-dependencies]
+gpu = ["triton>=3", "flash-attn>=2.7"]
+test = ["pytest>=8", "numpy"]
+
+[tool.setuptools.packages.find]
+include = ["nanovllm*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = [".", "tests"]

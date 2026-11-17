@@ -1,0 +1,19 @@
+{
+  "job_id": 24846937,
+  "state": "COMPLETED",
+  "exit_code": "0:0",
+  "elapsed": "02:14:04",
+  "device": "NVIDIA A100-SXM4-80GB",
+  "seed": 29,
+  "passes": 1,
+  "reused_cells": [
+    "cell-0000.json",
+    "cell-0001.json",
+    "cell-0002.json"
+  ],
+  "reuse_source_job": 24846564,
+  "reuse_note": "Exact compatible completed seed-29/pass-index-1 cells; not additional repetitions.",
+  "input_panel_available": false,
+  "input_panel_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2",
+  "publication": "Private account paths and GPU UUID redacted; generated output token IDs omitted; numerical measurements preserved."
+}

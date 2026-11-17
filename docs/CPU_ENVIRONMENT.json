@@ -1,0 +1,9 @@
+{
+  "python": "3.11.9",
+  "platform": "Windows-10-10.0.26200-SP0",
+  "torch": "2.15.0+cpu",
+  "transformers": "4.57.6",
+  "pytest": "9.2.0",
+  "cuda_available": false,
+  "torchdynamo_disable": "1"
+}

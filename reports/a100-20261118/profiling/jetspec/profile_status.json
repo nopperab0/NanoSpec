@@ -1,0 +1,7 @@
+{
+  "mode": "torch",
+  "steps": 84,
+  "telemetry_error": "Command '['nvidia-smi', '-i', '<GPU_UUID>', '--query-gpu=utilization.gpu,utilization.memory,memory.used,power.draw,clocks.sm,clocks.mem,temperature.gpu', '--format=csv,noheader,nounits']' returned non-zero exit status 6.",
+  "complete_capture": true,
+  "trace_written": true
+}

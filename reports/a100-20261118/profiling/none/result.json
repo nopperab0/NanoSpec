@@ -1,0 +1,153 @@
+{
+  "schema_version": 2,
+  "job": {
+    "method": "none",
+    "target": "<RUN_ROOT>/models/Qwen3-8B",
+    "drafts": {
+      "naive": "<RUN_ROOT>/models/Qwen3-0.6B",
+      "dflash": "<RUN_ROOT>/models/dflash_qwen3_8b_block7",
+      "dspark": "<RUN_ROOT>/models/dspark_qwen3_8b_block7",
+      "jetspec": "<RUN_ROOT>/models/jetspec-qwen3-8b"
+    },
+    "prompts": "<RUN_ROOT>/benchmarks/inputs/speed-128.json",
+    "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2",
+    "concurrency": 1,
+    "seed": 29,
+    "repeat": 1,
+    "naive_k": 7,
+    "tree_width": 4,
+    "tree_budget": 32,
+    "max_tokens": 64,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 16384,
+    "target_kv_bytes": 17179869184,
+    "draft_kv_bytes": 8589934592,
+    "eager": true,
+    "warmup": 1,
+    "load": "closed",
+    "num_requests": 4,
+    "arrival_rate": 1.0,
+    "slo_ttft_ms": 1000,
+    "slo_tpot_ms": 50,
+    "slo_gap_ms": 100,
+    "profile_mode": "torch",
+    "profile_dir": "<RUN_ROOT>/results/csf-24846937/profiles/none",
+    "profile_wait": 2,
+    "profile_steps": 8
+  },
+  "status": "ok",
+  "environment": {
+    "python": "3.11.18",
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "cuda": "12.8",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "platform": "Linux-5.14.0-611.55.1.el9_7.0.3.x86_64-x86_64-with-glibc2.34",
+    "flash-attn": "2.8.3",
+    "triton": "3.6.0",
+    "nvidia_smi": "NVIDIA A100-SXM4-80GB, <GPU_UUID>, 595.112.07, 400.00 W"
+  },
+  "wall_seconds": 9.169613522011787,
+  "metrics": {
+    "request_count": 4,
+    "requests_s": 0.4362234013895944,
+    "latency_ms": {
+      "count": 4,
+      "mean": 2292.379893748148,
+      "p50": 2144.068352994509,
+      "p95": 2652.978562208591,
+      "p99": 2724.483340451261,
+      "max": 2742.3595350119285
+    },
+    "ttft_ms": {
+      "count": 4,
+      "mean": 77.78743675589794,
+      "p50": 77.98294701206032,
+      "p95": 78.83810515631922,
+      "p99": 78.86229943600483,
+      "max": 78.86834800592624
+    },
+    "queue_ms": {
+      "count": 4,
+      "mean": 0.06207425030879676,
+      "p50": 0.06684601248707622,
+      "p95": 0.07859454053686932,
+      "p99": 0.08013569662580267,
+      "max": 0.080520985648036
+    },
+    "tpot_ms": {
+      "count": 4,
+      "mean": 35.152261222099206,
+      "p50": 32.80281326973751,
+      "p95": 40.8861420031162,
+      "p99": 42.01926484502138,
+      "max": 42.30254555549768
+    },
+    "delivery_gap_ms": {
+      "count": 252,
+      "mean": 35.152261222099206,
+      "p50": 32.72286648279987,
+      "p95": 33.938761200988665,
+      "p99": 49.12831237510546,
+      "max": 484.53923501074314
+    },
+    "delivery_tokens": {
+      "count": 256,
+      "mean": 1.0,
+      "p50": 1.0,
+      "p95": 1.0,
+      "p99": 1.0,
+      "max": 1
+    },
+    "steady_seconds": 9.05933607998304,
+    "steady_tokens": 254,
+    "steady_tok_s": 28.037374677071863,
+    "decode_step_tok_s": 30.071957227178363,
+    "committed_decode_tokens": 252,
+    "committed_tokens_per_sequence_round": 1.0,
+    "slo": {
+      "ttft_ms": 1000,
+      "tpot_ms": 50,
+      "gap_ms": 100
+    },
+    "goodput_requests_s": 0.3271675510421958,
+    "goodput_tokens_s": 20.93872326670053,
+    "preemptions": 0,
+    "recomputed_tokens": 0,
+    "peak_target_blocks": 5,
+    "peak_draft_blocks": 0,
+    "target_block_capacity": 455,
+    "draft_block_capacity": 0,
+    "scheduler_seconds": 0.008370724885025993,
+    "phase_ms": {},
+    "verified_positions_per_committed_token": null,
+    "phase_us_per_committed_token": {},
+    "accepted_prefix_survival": []
+  },
+  "profiled": true,
+  "checkpoint_sources": {
+    "target": {
+      "repo": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "directory": "Qwen3-8B"
+    }
+  },
+  "checkpoint_config_sha256": {
+    "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30"
+  },
+  "source_sha256": "b1cb407c2893bc1462ad5b3558dfd4c89b720dcb31e2e5de1fc756aeffb8bae7",
+  "benchmark_source_sha256": "b8478c1e972f526d015cb41935720e935dff336043db387622905234be82a57b",
+  "output_tokens": 256,
+  "wall_tok_s": 27.918297688934043,
+  "peak_allocated_bytes": 33720701952,
+  "peak_reserved_bytes": 33797701632,
+  "accepted_drafts": 0,
+  "sequence_rounds": 0,
+  "acceptance_rate": null,
+  "tokens_per_round_before_stop": null,
+  "num_speculative_tokens": 0,
+  "stats": {}
+}

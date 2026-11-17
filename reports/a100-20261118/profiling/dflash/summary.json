@@ -1,0 +1,64 @@
+{
+  "captured_steps": 8,
+  "window_ms": 792.7236513671875,
+  "kernel_launches": 5568,
+  "kernel_sum_ms": 117.34907499999993,
+  "device_active_union_ms": 117.73182421875,
+  "device_activity_coverage_pct": 14.851559432559043,
+  "memcpy_events": 176,
+  "host_sync_calls": 9,
+  "host_sync_ms": 0.039069,
+  "top_kernels": [
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_64x3_tn",
+      "calls": 328,
+      "kernel_ms": 38.850881000000015
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+      "calls": 656,
+      "kernel_ms": 29.878714999999982
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+      "calls": 352,
+      "kernel_ms": 22.963127999999987
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, true, false, false, false, true, false, false, false>(flash::Flash_fwd_params)",
+      "calls": 288,
+      "kernel_ms": 9.507319999999996
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_0",
+      "calls": 1376,
+      "kernel_ms": 4.350701999999985
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::cunn_SoftMaxForward<4, float, float, float, at::native::(anonymous namespace)::SoftMaxForwardEpilogue>(float*, float const*, int)",
+      "calls": 16,
+      "kernel_ms": 1.5158600000000002
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, false, false, false, false, true, false, true, false>(flash::Flash_fwd_params)",
+      "calls": 40,
+      "kernel_ms": 1.3536860000000002
+    },
+    {
+      "name": "triton_poi_fused__to_copy_add_cat_index_mul_split_sub_0",
+      "calls": 368,
+      "kernel_ms": 1.0842559999999968
+    },
+    {
+      "name": "triton_poi_fused__to_copy_add_cat_index_mul_split_sub_1",
+      "calls": 328,
+      "kernel_ms": 0.9389379999999969
+    },
+    {
+      "name": "triton_poi_fused_mul_silu_split_0",
+      "calls": 328,
+      "kernel_ms": 0.9238109999999989
+    }
+  ],
+  "method": "dflash"
+}

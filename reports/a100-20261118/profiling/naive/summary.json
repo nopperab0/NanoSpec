@@ -1,0 +1,64 @@
+{
+  "captured_steps": 8,
+  "window_ms": 2698.0126811523437,
+  "kernel_launches": 30454,
+  "kernel_sum_ms": 241.54087500001808,
+  "device_active_union_ms": 242.549806640625,
+  "device_activity_coverage_pct": 8.989943165761176,
+  "memcpy_events": 383,
+  "host_sync_calls": 9,
+  "host_sync_ms": 0.04768,
+  "top_kernels": [
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_64x3_tn",
+      "calls": 288,
+      "kernel_ms": 34.196033000000014
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_ldg8_f2f_stages_64x5_tn",
+      "calls": 1708,
+      "kernel_ms": 29.17907099999995
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+      "calls": 576,
+      "kernel_ms": 26.18864099999997
+    },
+    {
+      "name": "std::enable_if<!(false), void>::type internal::gemvx::kernel<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, float, false, true, true, false, 7, false, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16>, float> >(cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16>, float>)",
+      "calls": 3304,
+      "kernel_ms": 26.01548999999981
+    },
+    {
+      "name": "triton_per_fused__to_copy_add_mean_mul_pow_rsqrt_0",
+      "calls": 6667,
+      "kernel_ms": 16.556681999999846
+    },
+    {
+      "name": "void gemv2T_kernel_val<int, int, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, float, 128, 16, 4, 4, false, false, cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16>, float> >(cublasGemvParamsEx<int, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16 const>, cublasGemvTensorStridedBatched<__nv_bfloat16>, float>, float, float)",
+      "calls": 1652,
+      "kernel_ms": 15.75513299999998
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+      "calls": 296,
+      "kernel_ms": 15.197985
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, false, false, false, false, true, false, true, false>(flash::Flash_fwd_params)",
+      "calls": 1652,
+      "kernel_ms": 15.11749099999997
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, 4, 4, true>(flash::Flash_fwd_params)",
+      "calls": 1652,
+      "kernel_ms": 11.564376000000003
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, true, false, false, false, true, false, false, false>(flash::Flash_fwd_params)",
+      "calls": 288,
+      "kernel_ms": 9.771567000000005
+    }
+  ],
+  "method": "naive"
+}

@@ -1,0 +1,64 @@
+{
+  "captured_steps": 8,
+  "window_ms": 387.29565673828125,
+  "kernel_launches": 4448,
+  "kernel_sum_ms": 88.01585299999994,
+  "device_active_union_ms": 88.47873046875,
+  "device_activity_coverage_pct": 22.84526793145536,
+  "memcpy_events": 88,
+  "host_sync_calls": 9,
+  "host_sync_ms": 0.032983,
+  "top_kernels": [
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_128x64_ldg8_f2f_stages_32x6_tn",
+      "calls": 288,
+      "kernel_ms": 34.395432999999976
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+      "calls": 576,
+      "kernel_ms": 25.764911999999992
+    },
+    {
+      "name": "void cutlass::Kernel2<cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_64x64_64x6_tn_align8>(cutlass_80_tensorop_bf16_s16816gemm_relu_bf16_64x64_64x6_tn_align8::Params)",
+      "calls": 288,
+      "kernel_ms": 9.397074
+    },
+    {
+      "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+      "calls": 8,
+      "kernel_ms": 5.434487
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, false, false, false, false, true, false, true, false>(flash::Flash_fwd_params)",
+      "calls": 288,
+      "kernel_ms": 2.7761740000000015
+    },
+    {
+      "name": "triton_red_fused__to_copy_add_mean_mul_pow_rsqrt_0",
+      "calls": 584,
+      "kernel_ms": 2.1714019999999965
+    },
+    {
+      "name": "void flash::flash_fwd_splitkv_combine_kernel<Flash_fwd_kernel_traits<128, 64, 128, 4, false, false, cutlass::bfloat16_t, Flash_kernel_traits<128, 64, 128, 4, cutlass::bfloat16_t> >, 4, 4, true>(flash::Flash_fwd_params)",
+      "calls": 288,
+      "kernel_ms": 1.8491910000000034
+    },
+    {
+      "name": "triton_per_fused__to_copy_add_mean_mul_pow_rsqrt_0",
+      "calls": 576,
+      "kernel_ms": 1.3560870000000051
+    },
+    {
+      "name": "void at::native::(anonymous namespace)::cunn_SoftMaxForward<4, float, float, float, at::native::(anonymous namespace)::SoftMaxForwardEpilogue>(float*, float const*, int)",
+      "calls": 8,
+      "kernel_ms": 0.730555
+    },
+    {
+      "name": "triton_poi_fused_mul_silu_split_0",
+      "calls": 288,
+      "kernel_ms": 0.7196160000000006
+    }
+  ],
+  "method": "none"
+}

@@ -1,0 +1,219 @@
+{
+  "schema_version": 2,
+  "job": {
+    "method": "jetspec",
+    "target": "<RUN_ROOT>/models/Qwen3-8B",
+    "drafts": {
+      "naive": "<RUN_ROOT>/models/Qwen3-0.6B",
+      "dflash": "<RUN_ROOT>/models/dflash_qwen3_8b_block7",
+      "dspark": "<RUN_ROOT>/models/dspark_qwen3_8b_block7",
+      "jetspec": "<RUN_ROOT>/models/jetspec-qwen3-8b"
+    },
+    "prompts": "<RUN_ROOT>/benchmarks/inputs/speed-128.json",
+    "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2",
+    "concurrency": 1,
+    "seed": 29,
+    "repeat": 1,
+    "naive_k": 7,
+    "tree_width": 4,
+    "tree_budget": 32,
+    "max_tokens": 64,
+    "temperature": 0.7,
+    "top_k": 20,
+    "top_p": 0.8,
+    "max_model_len": 4096,
+    "max_num_batched_tokens": 16384,
+    "target_kv_bytes": 17179869184,
+    "draft_kv_bytes": 8589934592,
+    "eager": true,
+    "warmup": 1,
+    "load": "closed",
+    "num_requests": 4,
+    "arrival_rate": 1.0,
+    "slo_ttft_ms": 1000,
+    "slo_tpot_ms": 50,
+    "slo_gap_ms": 100,
+    "profile_mode": "torch",
+    "profile_dir": "<RUN_ROOT>/results/csf-24846937/profiles/jetspec",
+    "profile_wait": 2,
+    "profile_steps": 8
+  },
+  "status": "ok",
+  "environment": {
+    "python": "3.11.18",
+    "torch": "2.11.0+cu128",
+    "transformers": "4.57.6",
+    "cuda": "12.8",
+    "gpu": "NVIDIA A100-SXM4-80GB",
+    "platform": "Linux-5.14.0-611.55.1.el9_7.0.3.x86_64-x86_64-with-glibc2.34",
+    "flash-attn": "2.8.3",
+    "triton": "3.6.0",
+    "nvidia_smi": "NVIDIA A100-SXM4-80GB, <GPU_UUID>, 595.112.07, 400.00 W"
+  },
+  "wall_seconds": 6.215981239976827,
+  "metrics": {
+    "request_count": 4,
+    "requests_s": 0.6435025856054405,
+    "latency_ms": {
+      "count": 4,
+      "mean": 1553.9696869964246,
+      "p50": 1417.9374119848944,
+      "p95": 2141.8113587700645,
+      "p99": 2231.5860749743297,
+      "max": 2254.029754025396
+    },
+    "ttft_ms": {
+      "count": 4,
+      "mean": 77.3709749992122,
+      "p50": 77.16057699872181,
+      "p95": 79.04343105183216,
+      "p99": 79.21850061189616,
+      "max": 79.26226800191216
+    },
+    "queue_ms": {
+      "count": 4,
+      "mean": 0.0753442436689511,
+      "p50": 0.07614848436787724,
+      "p95": 0.10877593740588053,
+      "p99": 0.11247757793171331,
+      "max": 0.1134029880631715
+    },
+    "tpot_ms": {
+      "count": 4,
+      "mean": 23.438074793606546,
+      "p50": 21.29727418235104,
+      "p95": 32.76656246538521,
+      "p99": 34.18793343306456,
+      "max": 34.5432761749844
+    },
+    "delivery_gap_ms": {
+      "count": 80,
+      "mean": 73.82993559986062,
+      "p50": 54.83849800657481,
+      "p95": 83.59604806173593,
+      "p99": 432.03564141905514,
+      "max": 1173.2536320050713
+    },
+    "delivery_tokens": {
+      "count": 84,
+      "mean": 3.0476190476190474,
+      "p50": 3.0,
+      "p95": 7.849999999999994,
+      "p99": 9.0,
+      "max": 9
+    },
+    "steady_seconds": 6.083245565998368,
+    "steady_tokens": 254,
+    "steady_tok_s": 41.7540270640569,
+    "decode_step_tok_s": 52.755491404132876,
+    "committed_decode_tokens": 252,
+    "committed_tokens_per_sequence_round": 3.15,
+    "slo": {
+      "ttft_ms": 1000,
+      "tpot_ms": 50,
+      "gap_ms": 100
+    },
+    "goodput_requests_s": 0.48262693920408034,
+    "goodput_tokens_s": 30.888124109061142,
+    "preemptions": 0,
+    "recomputed_tokens": 0,
+    "peak_target_blocks": 5,
+    "peak_draft_blocks": 0,
+    "target_block_capacity": 455,
+    "draft_block_capacity": 0,
+    "scheduler_seconds": 0.003236954886233434,
+    "phase_ms": {
+      "propose_tree": {
+        "count": 80,
+        "mean": 6.68828399181366,
+        "p50": 6.173424005508423,
+        "p95": 8.54745626449585,
+        "p99": 12.780354194641012,
+        "max": 25.575775146484375
+      },
+      "verify_tree": {
+        "count": 80,
+        "mean": 49.357773303985596,
+        "p50": 45.327632904052734,
+        "p95": 69.27387237548828,
+        "p99": 95.88684577941822,
+        "max": 187.3780517578125
+      },
+      "accept_tree": {
+        "count": 80,
+        "mean": 0.8096191987395287,
+        "p50": 0.7423680126667023,
+        "p95": 1.3833536148071288,
+        "p99": 1.65911580443382,
+        "max": 2.0129599571228027
+      },
+      "commit_tree": {
+        "count": 80,
+        "mean": 2.64196320772171,
+        "p50": 2.3492801189422607,
+        "p95": 3.3118767619132994,
+        "p99": 6.716282780170341,
+        "max": 19.288127899169922
+      }
+    },
+    "verified_positions_per_committed_token": 10.158730158730158,
+    "phase_us_per_committed_token": {
+      "propose_tree": 2123.2647593059237,
+      "verify_tree": 15669.13438221765,
+      "accept_tree": 257.02196785381864,
+      "commit_tree": 838.7184786418128
+    },
+    "accepted_prefix_survival": [
+      0.775,
+      0.5875,
+      0.35,
+      0.1625,
+      0.125,
+      0.1125,
+      0.0625,
+      0.0375
+    ]
+  },
+  "profiled": true,
+  "checkpoint_sources": {
+    "target": {
+      "repo": "Qwen/Qwen3-8B",
+      "revision": "b968826d9c46dd6066d109eabc6255188de91218",
+      "directory": "Qwen3-8B"
+    },
+    "draft": {
+      "repo": "JetSpec/jetspec-qwen3-8b",
+      "revision": "020a198caefde24a2891ad827cba7fb977ccdc36",
+      "directory": "jetspec-qwen3-8b"
+    }
+  },
+  "checkpoint_config_sha256": {
+    "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+    "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+  },
+  "source_sha256": "b1cb407c2893bc1462ad5b3558dfd4c89b720dcb31e2e5de1fc756aeffb8bae7",
+  "benchmark_source_sha256": "b8478c1e972f526d015cb41935720e935dff336043db387622905234be82a57b",
+  "output_tokens": 256,
+  "wall_tok_s": 41.18416547874819,
+  "peak_allocated_bytes": 38293522432,
+  "peak_reserved_bytes": 38371590144,
+  "accepted_drafts": 177,
+  "sequence_rounds": 80,
+  "acceptance_rate": 0.07137096774193548,
+  "tokens_per_round_before_stop": 3.2125,
+  "num_speculative_tokens": 31,
+  "stats": {
+    "accepted_0": 18,
+    "proposed_nodes": 2480,
+    "verified_positions": 2560,
+    "rounds": 80,
+    "accepted_7": 2,
+    "accepted_1": 15,
+    "accepted_4": 3,
+    "accepted_2": 19,
+    "accepted_6": 4,
+    "accepted_3": 15,
+    "accepted_5": 1,
+    "accepted_8": 3
+  }
+}

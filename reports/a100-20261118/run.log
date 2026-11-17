@@ -1,0 +1,26 @@
+[1/15] reuse none C=32 seed=29
+[2/15] reuse dflash C=8 seed=29
+[3/15] reuse none C=8 seed=29
+[4/15] run dspark C=32 seed=29
+[5/15] run dspark C=1 seed=29
+[6/15] run jetspec C=8 seed=29
+[7/15] run none C=1 seed=29
+[8/15] run jetspec C=1 seed=29
+[9/15] run naive C=1 seed=29
+[10/15] run dflash C=1 seed=29
+[11/15] run naive C=8 seed=29
+[12/15] run jetspec C=32 seed=29
+[13/15] run dflash C=32 seed=29
+[14/15] run naive C=32 seed=29
+[15/15] run dspark C=8 seed=29
+<ENV_ROOT>/lib/python3.11/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+<ENV_ROOT>/lib/python3.11/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+<ENV_ROOT>/lib/python3.11/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+<ENV_ROOT>/lib/python3.11/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+<ENV_ROOT>/lib/python3.11/site-packages/torch/profiler/profiler.py:224: UserWarning: Warning: Profiler clears events at the end of each cycle.Only events from the current cycle will be reported.To keep events across cycles, set acc_events=True.
+  _warn_once(
+Run completed: results/csf-24846937
