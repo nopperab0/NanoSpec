@@ -40,7 +40,7 @@ The run uses:
 - Naive k=7, block7 heads, JetSpec tree budget=32 and width=4.
 - Fifteen performance cells followed by separate C=1 PyTorch profiles for the baseline and four methods.
 
-The larger KV budgets are intended to accommodate the 32-request, approximately 1k-prompt workload on an 80 GB A100. These are allocation settings, not measured memory guarantees; any actual failure is preserved in its cell log. JetSpec's per-request eager tree verification can make the full matrix slow. The 24-hour value is a limit, not a predicted runtime.
+The larger KV budgets are intended to accommodate the 32-request, approximately 1k-prompt workload on an 80 GB A100. These are allocation settings, not measured memory guarantees; any actual failure is preserved in its cell log. For the six JetSpec eager and CUDA Graph cells and their four diagnostic profiles, set `NANO_ORIGINAL` to the source benchmark checkout containing `results/csf-24846937/performance`, then run `sbatch --export=ALL scripts/csf_jetspec.sbatch` from the prepared JetSpec checkout.
 
 To set a different requested matrix directly:
 

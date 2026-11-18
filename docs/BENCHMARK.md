@@ -50,7 +50,7 @@ The benchmark uses fixed output length with EOS ignored. Correctness tests separ
 
 For roughly matched target verification budgets, use naive k=7, block7 DFlash/DSpark and JetSpec budget=8 including the root. For natural configurations, use JetSpec budget=32 and sweep width/budget explicitly. Its trained block16 head remains different from a block7 head. Checkpoint training and model capacity are confounders, even with matched verification work.
 
-JetSpec currently uses per-request eager SDPA tree verification. The other methods batch their target verification through FlashAttention. Results compare these implementations, not an optimized JetSpec reproduction or a pure algorithm ablation.
+JetSpec uses batched paged Triton tree verification, measured both in eager mode and with CUDA Graphs for the draft-head and target forwards. DFlash and DSpark use batched FlashAttention verification.
 
 The built-in panel is for smoke tests. The optional SPEED panel freezes unique first turns by salted SHA256 order, filters CJK text, applies the Qwen non-thinking template and stores token IDs, category labels, dataset revision and tokenizer metadata. It is not category-stratified and is not the reference repository's confirmation panel. Respect the dataset's evaluation license.
 

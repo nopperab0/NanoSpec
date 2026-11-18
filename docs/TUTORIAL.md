@@ -48,7 +48,9 @@ The base cumulative-logprob builder reuses per-depth candidates across expansion
 
 Greedy traversal follows target argmax. Stochastic traversal draws from the full target conditional distribution at each visited node; it continues if that token is a child, otherwise emits it and ends the round. The tree is a lookup accelerator for already-computed target conditionals, not a renormalized target distribution. This preserves the target distribution, but differs from the paper's non-greedy p/q rejection protocol.
 
-The readable tree attention backend is eager PyTorch SDPA, processed per request. Ordinary nano attention is unchanged. There is no JetSpec tree batching, graph capture, custom high-performance kernel or JetSpec++ pipeline here.
+JetSpec defaults to `jetspec_backend="triton"`. It batches the causal head and target verifier, builds and traverses trees on the GPU, and reads the KV cache through paged Triton attention with ancestor masks and native GQA. Accepted KV entries are gathered before scattering to protect overlapping slots. The scheduler receives one packed batch of counts and tokens per round.
+
+Set `jetspec_cuda_graph=True` (CLI `--jetspec-cuda-graph`) to capture the draft-head and target-model forwards in power-of-two batch buckets. Sampling and the host scheduler remain eager. For the serial PyTorch SDPA implementation, set `jetspec_backend="reference"` (CLI `--jetspec-backend reference`). See the [A100 report](../reports/a100-20261118/RESULTS.md) for both Triton modes.
 
 ## Suggested experiments
 

@@ -1,0 +1,535 @@
+{
+  "job_id": 24896042,
+  "elapsed_seconds": 1412,
+  "gpu": "NVIDIA A100-SXM4-80GB",
+  "cells": [
+    {
+      "status": "ok",
+      "output_tokens": 32768,
+      "wall_seconds": 422.91172866000124,
+      "wall_tok_s": 77.48188990602279,
+      "peak_allocated_bytes": 38316455424,
+      "peak_reserved_bytes": 38419824640,
+      "acceptance_rate": 0.07249944272840174,
+      "source_sha256": "e15bf8fb899a11933d65e73dd12d8748d2e1d7eeb7a9daa3ab73593e804c0dfc",
+      "benchmark_source_sha256": "c3011483e9145cde3168185ab67bd6956025f77726cc96ceadc2762fd7c56c40",
+      "checkpoint_config_sha256": {
+        "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+        "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+      },
+      "job": {
+        "method": "jetspec",
+        "concurrency": 1,
+        "seed": 29,
+        "repeat": 1,
+        "jetspec_backend": "triton",
+        "jetspec_cuda_graph": false,
+        "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2"
+      },
+      "metrics": {
+        "steady_tok_s": 77.49376416966123,
+        "ttft_ms": {
+          "p50": 74.94228249925072,
+          "p99": 85.13798073290673
+        },
+        "latency_ms": {
+          "p50": 3401.03378150161,
+          "p99": 5803.82088044084
+        },
+        "tpot_ms": {
+          "p50": 13.049124729421273,
+          "p99": 22.461041451532836
+        },
+        "delivery_gap_ms": {
+          "p50": 40.818125002260786,
+          "p99": 41.80232354941836
+        },
+        "goodput_requests_s": 0.3002990728169218,
+        "preemptions": 0,
+        "recomputed_tokens": 0,
+        "committed_tokens_per_sequence_round": 3.222112537018756,
+        "verified_positions_per_committed_token": 9.931372549019608,
+        "peak_target_blocks": 7,
+        "target_block_capacity": 455,
+        "phase_us_per_committed_token": {
+          "propose_tree": 1681.633636457663,
+          "verify_tree": 10146.082009696493,
+          "accept_tree": 175.91608064066546,
+          "commit_tree": 466.78729400257856
+        }
+      },
+      "stats": {
+        "graph_replays": 0,
+        "graph_captures": 0,
+        "rounds": 10130,
+        "batched_target_forwards": 10130,
+        "scheduler_batch_transfers": 10130
+      }
+    },
+    {
+      "status": "ok",
+      "output_tokens": 32768,
+      "wall_seconds": 67.27379953500349,
+      "wall_tok_s": 487.08412824149104,
+      "peak_allocated_bytes": 39528254976,
+      "peak_reserved_bytes": 39854276608,
+      "acceptance_rate": 0.07026246702793039,
+      "source_sha256": "e15bf8fb899a11933d65e73dd12d8748d2e1d7eeb7a9daa3ab73593e804c0dfc",
+      "benchmark_source_sha256": "c3011483e9145cde3168185ab67bd6956025f77726cc96ceadc2762fd7c56c40",
+      "checkpoint_config_sha256": {
+        "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+        "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+      },
+      "job": {
+        "method": "jetspec",
+        "concurrency": 8,
+        "seed": 29,
+        "repeat": 1,
+        "jetspec_backend": "triton",
+        "jetspec_cuda_graph": false,
+        "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2"
+      },
+      "metrics": {
+        "steady_tok_s": 497.4806165869155,
+        "ttft_ms": {
+          "p50": 75.77658450099989,
+          "p99": 504.68224300129805
+        },
+        "latency_ms": {
+          "p50": 4368.467828498979,
+          "p99": 6129.106115122851
+        },
+        "tpot_ms": {
+          "p50": 16.83115446078363,
+          "p99": 23.735302132222518
+        },
+        "delivery_gap_ms": {
+          "p50": 43.462724999699276,
+          "p99": 120.76895499922102
+        },
+        "goodput_requests_s": 0.029729255874114444,
+        "preemptions": 0,
+        "recomputed_tokens": 0,
+        "committed_tokens_per_sequence_round": 3.1548424511888653,
+        "verified_positions_per_committed_token": 10.14313725490196,
+        "peak_target_blocks": 46,
+        "target_block_capacity": 455,
+        "phase_us_per_committed_token": {
+          "propose_tree": 260.05318017274726,
+          "verify_tree": 1338.2685187984916,
+          "accept_tree": 125.26986675300435,
+          "commit_tree": 16.98158435596555
+        }
+      },
+      "stats": {
+        "graph_replays": 0,
+        "graph_captures": 0,
+        "rounds": 1322,
+        "batched_target_forwards": 1322,
+        "scheduler_batch_transfers": 1322
+      }
+    },
+    {
+      "status": "ok",
+      "output_tokens": 32768,
+      "wall_seconds": 49.91400224399695,
+      "wall_tok_s": 656.4891318435788,
+      "peak_allocated_bytes": 42289764352,
+      "peak_reserved_bytes": 43073404928,
+      "acceptance_rate": 0.06971203806817652,
+      "source_sha256": "e15bf8fb899a11933d65e73dd12d8748d2e1d7eeb7a9daa3ab73593e804c0dfc",
+      "benchmark_source_sha256": "c3011483e9145cde3168185ab67bd6956025f77726cc96ceadc2762fd7c56c40",
+      "checkpoint_config_sha256": {
+        "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+        "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+      },
+      "job": {
+        "method": "jetspec",
+        "concurrency": 32,
+        "seed": 29,
+        "repeat": 1,
+        "jetspec_backend": "triton",
+        "jetspec_cuda_graph": false,
+        "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2"
+      },
+      "metrics": {
+        "steady_tok_s": 742.2304154424747,
+        "ttft_ms": {
+          "p50": 133.3674109991989,
+          "p99": 2051.9666156778844
+        },
+        "latency_ms": {
+          "p50": 11552.314231499622,
+          "p99": 20703.09918010942
+        },
+        "tpot_ms": {
+          "p50": 43.13171236275344,
+          "p99": 78.72153933475131
+        },
+        "delivery_gap_ms": {
+          "p50": 109.97115999634843,
+          "p99": 310.55175900110044
+        },
+        "goodput_requests_s": 0,
+        "preemptions": 0,
+        "recomputed_tokens": 0,
+        "committed_tokens_per_sequence_round": 3.138763342629099,
+        "verified_positions_per_committed_token": 10.195098039215686,
+        "peak_target_blocks": 174,
+        "target_block_capacity": 455,
+        "phase_us_per_committed_token": {
+          "propose_tree": 128.05196474872383,
+          "verify_tree": 877.7782901829364,
+          "accept_tree": 114.59121560385707,
+          "commit_tree": 118.0722502425459
+        }
+      },
+      "stats": {
+        "graph_replays": 0,
+        "graph_captures": 0,
+        "rounds": 381,
+        "batched_target_forwards": 381,
+        "scheduler_batch_transfers": 381
+      }
+    },
+    {
+      "status": "ok",
+      "output_tokens": 32768,
+      "wall_seconds": 176.27714921900042,
+      "wall_tok_s": 185.88909648913264,
+      "peak_allocated_bytes": 38333889024,
+      "peak_reserved_bytes": 38533070848,
+      "acceptance_rate": 0.07249944272840174,
+      "source_sha256": "e15bf8fb899a11933d65e73dd12d8748d2e1d7eeb7a9daa3ab73593e804c0dfc",
+      "benchmark_source_sha256": "c3011483e9145cde3168185ab67bd6956025f77726cc96ceadc2762fd7c56c40",
+      "checkpoint_config_sha256": {
+        "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+        "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+      },
+      "job": {
+        "method": "jetspec",
+        "concurrency": 1,
+        "seed": 29,
+        "repeat": 1,
+        "jetspec_backend": "triton",
+        "jetspec_cuda_graph": true,
+        "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2"
+      },
+      "metrics": {
+        "steady_tok_s": 185.9655566588826,
+        "ttft_ms": {
+          "p50": 75.58879499993054,
+          "p99": 85.85497669977485
+        },
+        "latency_ms": {
+          "p50": 1417.1629105003376,
+          "p99": 2374.89056461811
+        },
+        "tpot_ms": {
+          "p50": 5.271476535292059,
+          "p99": 9.011828291441626
+        },
+        "delivery_gap_ms": {
+          "p50": 16.417817496403586,
+          "p99": 16.82874310252373
+        },
+        "goodput_requests_s": 0.7204563981359816,
+        "preemptions": 0,
+        "recomputed_tokens": 0,
+        "committed_tokens_per_sequence_round": 3.222112537018756,
+        "verified_positions_per_committed_token": 9.931372549019608,
+        "peak_target_blocks": 7,
+        "target_block_capacity": 455,
+        "phase_us_per_committed_token": {
+          "propose_tree": 783.259543506246,
+          "verify_tree": 3851.4621485974276,
+          "accept_tree": 176.4873424344057,
+          "commit_tree": 106.31052563423474
+        }
+      },
+      "stats": {
+        "graph_replays": 20260,
+        "graph_captures": 0,
+        "rounds": 10130,
+        "batched_target_forwards": 10130,
+        "scheduler_batch_transfers": 10130
+      }
+    },
+    {
+      "status": "ok",
+      "output_tokens": 32768,
+      "wall_seconds": 51.49718280699744,
+      "wall_tok_s": 636.3066524009441,
+      "peak_allocated_bytes": 39545119232,
+      "peak_reserved_bytes": 40275804160,
+      "acceptance_rate": 0.07029220323547483,
+      "source_sha256": "e15bf8fb899a11933d65e73dd12d8748d2e1d7eeb7a9daa3ab73593e804c0dfc",
+      "benchmark_source_sha256": "c3011483e9145cde3168185ab67bd6956025f77726cc96ceadc2762fd7c56c40",
+      "checkpoint_config_sha256": {
+        "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+        "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+      },
+      "job": {
+        "method": "jetspec",
+        "concurrency": 8,
+        "seed": 29,
+        "repeat": 1,
+        "jetspec_backend": "triton",
+        "jetspec_cuda_graph": true,
+        "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2"
+      },
+      "metrics": {
+        "steady_tok_s": 644.914513614493,
+        "ttft_ms": {
+          "p50": 76.59021899962681,
+          "p99": 506.48985700536286
+        },
+        "latency_ms": {
+          "p50": 3339.472822499374,
+          "p99": 4786.640992803151
+        },
+        "tpot_ms": {
+          "p50": 12.506659364703856,
+          "p99": 18.4303481909475
+        },
+        "delivery_gap_ms": {
+          "p50": 32.061327998235356,
+          "p99": 110.71062900009565
+        },
+        "goodput_requests_s": 0.03883707595220606,
+        "preemptions": 0,
+        "recomputed_tokens": 0,
+        "committed_tokens_per_sequence_round": 3.155757517161365,
+        "verified_positions_per_committed_token": 10.140196078431373,
+        "peak_target_blocks": 46,
+        "target_block_capacity": 455,
+        "phase_us_per_committed_token": {
+          "propose_tree": 161.0342100847001,
+          "verify_tree": 952.2009103905921,
+          "accept_tree": 126.91046233270683,
+          "commit_tree": 16.928909807557275
+        }
+      },
+      "stats": {
+        "graph_replays": 2646,
+        "graph_captures": 0,
+        "rounds": 1323,
+        "batched_target_forwards": 1323,
+        "scheduler_batch_transfers": 1323
+      }
+    },
+    {
+      "status": "ok",
+      "output_tokens": 32768,
+      "wall_seconds": 46.19671573800588,
+      "wall_tok_s": 709.3144929573831,
+      "peak_allocated_bytes": 40949060608,
+      "peak_reserved_bytes": 43037753344,
+      "acceptance_rate": 0.0699406566009817,
+      "source_sha256": "e15bf8fb899a11933d65e73dd12d8748d2e1d7eeb7a9daa3ab73593e804c0dfc",
+      "benchmark_source_sha256": "c3011483e9145cde3168185ab67bd6956025f77726cc96ceadc2762fd7c56c40",
+      "checkpoint_config_sha256": {
+        "target": "f7c4eadfbbf522470667b797a3c89be2524832d2d599797248dc304fff447c30",
+        "draft": "e4c5f9da812f74e3a082672d93c124c5d1af0c68830be439dad9a18ccc991ee8"
+      },
+      "job": {
+        "method": "jetspec",
+        "concurrency": 32,
+        "seed": 29,
+        "repeat": 1,
+        "jetspec_backend": "triton",
+        "jetspec_cuda_graph": true,
+        "prompts_sha256": "ec07767b56a2ce08dc99e7bd2e61796d742ee7d987678462335799e0003ffcd2"
+      },
+      "metrics": {
+        "steady_tok_s": 748.3075796865535,
+        "ttft_ms": {
+          "p50": 133.52985600067768,
+          "p99": 2058.8860267540445
+        },
+        "latency_ms": {
+          "p50": 11052.567482998711,
+          "p99": 20549.886408756647
+        },
+        "tpot_ms": {
+          "p50": 41.25197850586903,
+          "p99": 78.1123325263479
+        },
+        "delivery_gap_ms": {
+          "p50": 108.85932800010778,
+          "p99": 254.89455299975816
+        },
+        "goodput_requests_s": 0,
+        "preemptions": 0,
+        "recomputed_tokens": 0,
+        "committed_tokens_per_sequence_round": 3.1454177507950276,
+        "verified_positions_per_committed_token": 10.173529411764706,
+        "peak_target_blocks": 174,
+        "target_block_capacity": 455,
+        "phase_us_per_committed_token": {
+          "propose_tree": 121.01348428165211,
+          "verify_tree": 874.5213812472773,
+          "accept_tree": 119.4490036963686,
+          "commit_tree": 10.103498034946183
+        }
+      },
+      "stats": {
+        "graph_replays": 756,
+        "graph_captures": 0,
+        "rounds": 378,
+        "batched_target_forwards": 378,
+        "scheduler_batch_transfers": 378
+      }
+    }
+  ],
+  "profiles": {
+    "triton-eager-c1": {
+      "captured_steps": 8,
+      "window_ms": 636.882861328125,
+      "kernel_launches": 5936,
+      "kernel_sum_ms": 129.01060600000056,
+      "device_active_union_ms": 129.4245751953125,
+      "device_activity_coverage_pct": 20.321566657550918,
+      "memcpy_events": 128,
+      "host_sync_calls": 9,
+      "host_sync_ms": 0.028976,
+      "top_kernels": [
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_256x64_ldg8_f2f_stages_64x3_tn",
+          "calls": 584,
+          "kernel_ms": 61.42932099999997
+        },
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+          "calls": 656,
+          "kernel_ms": 21.311918000000016
+        },
+        {
+          "name": "_attention",
+          "calls": 288,
+          "kernel_ms": 14.722025999999994
+        }
+      ],
+      "status": {
+        "mode": "torch",
+        "steps": 78,
+        "telemetry_error": null,
+        "complete_capture": true,
+        "trace_written": true
+      },
+      "cudaLaunchKernel": 2848,
+      "cudaGraphLaunch": 0
+    },
+    "triton-eager-c32": {
+      "captured_steps": 8,
+      "window_ms": 883.9538857421875,
+      "kernel_launches": 5591,
+      "kernel_sum_ms": 843.8722759999994,
+      "device_active_union_ms": 850.0522739257813,
+      "device_activity_coverage_pct": 96.16477597268079,
+      "memcpy_events": 112,
+      "host_sync_calls": 9,
+      "host_sync_ms": 0.062757,
+      "top_kernels": [
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_64x3_tn",
+          "calls": 1321,
+          "kernel_ms": 519.7350820000004
+        },
+        {
+          "name": "_attention",
+          "calls": 288,
+          "kernel_ms": 102.115132
+        },
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_64x3_tn",
+          "calls": 16,
+          "kernel_ms": 55.68258
+        }
+      ],
+      "status": {
+        "mode": "torch",
+        "steps": 34,
+        "telemetry_error": null,
+        "complete_capture": true,
+        "trace_written": true
+      },
+      "cudaLaunchKernel": 2496,
+      "cudaGraphLaunch": 0
+    },
+    "triton-graph-c1": {
+      "captured_steps": 8,
+      "window_ms": 137.94475341796874,
+      "kernel_launches": 5936,
+      "kernel_sum_ms": 126.67156600000041,
+      "device_active_union_ms": 126.76450927734375,
+      "device_activity_coverage_pct": 91.89512912698522,
+      "memcpy_events": 128,
+      "host_sync_calls": 9,
+      "host_sync_ms": 0.048233000000000005,
+      "top_kernels": [
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_256x64_ldg8_f2f_stages_64x3_tn",
+          "calls": 584,
+          "kernel_ms": 60.71160699999998
+        },
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+          "calls": 656,
+          "kernel_ms": 20.878579999999978
+        },
+        {
+          "name": "_attention",
+          "calls": 288,
+          "kernel_ms": 14.719920000000002
+        }
+      ],
+      "status": {
+        "mode": "torch",
+        "steps": 78,
+        "telemetry_error": null,
+        "complete_capture": true,
+        "trace_written": true
+      },
+      "cudaLaunchKernel": 1072,
+      "cudaGraphLaunch": 16
+    },
+    "triton-graph-c32": {
+      "captured_steps": 8,
+      "window_ms": 866.0927236328125,
+      "kernel_launches": 5595,
+      "kernel_sum_ms": 843.9056979999981,
+      "device_active_union_ms": 849.5916948242187,
+      "device_activity_coverage_pct": 98.09477341647896,
+      "memcpy_events": 112,
+      "host_sync_calls": 9,
+      "host_sync_ms": 0.20146899999999998,
+      "top_kernels": [
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_64x3_tn",
+          "calls": 1322,
+          "kernel_ms": 520.5152009999997
+        },
+        {
+          "name": "_attention",
+          "calls": 288,
+          "kernel_ms": 102.38045800000006
+        },
+        {
+          "name": "ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_64x3_tn",
+          "calls": 16,
+          "kernel_ms": 55.75858399999999
+        }
+      ],
+      "status": {
+        "mode": "torch",
+        "steps": 31,
+        "telemetry_error": null,
+        "complete_capture": true,
+        "trace_written": true
+      },
+      "cudaLaunchKernel": 1048,
+      "cudaGraphLaunch": 16
+    }
+  }
+}

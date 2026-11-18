@@ -11,9 +11,10 @@ import json
 from pathlib import Path
 
 
-METHODS = ['none', 'naive', 'dflash', 'dspark', 'jetspec']
-LABELS = dict(none='Baseline', naive='Naive', dflash='DFlash', dspark='DSpark', jetspec='JetSpec')
-COLORS = ['#64748b', '#e59b30', '#26856a', '#3975c5', '#9955aa']
+METHODS = ['none', 'naive', 'dflash', 'dspark', 'jetspec', 'jetspec_graph']
+COMPARISON_PROFILE_METHODS = METHODS[:4]
+LABELS = dict(none='Baseline', naive='Naive', dflash='DFlash', dspark='DSpark', jetspec='JetSpec eager', jetspec_graph='JetSpec graph')
+COLORS = ['#64748b', '#e59b30', '#26856a', '#3975c5', '#9955aa', '#ae4564']
 PHASES = ['propose', 'verify', 'ctx_store', 'accept', 'commit']
 
 
@@ -98,26 +99,26 @@ def figures(run, cells, profiles, timeline):
     for ax, concurrency in zip(axes, [1, 8, 32]):
         base = cells[(concurrency, 'none')]['wall_tok_s']
         values = [cells[(concurrency, m)]['wall_tok_s'] for m in METHODS]
-        ax.bar(range(5), values, color=COLORS)
-        ax.set_xticks(range(5), [LABELS[m] for m in METHODS], rotation=28, ha='right')
+        ax.bar(range(len(METHODS)), values, color=COLORS)
+        ax.set_xticks(range(len(METHODS)), [LABELS[m] for m in METHODS], rotation=28, ha='right')
         ax.set_title(f'Concurrency {concurrency}')
         ax.set_ylabel('Delivered output tokens / s')
         ax.set_ylim(0, max(values) * 1.25)
         for i, value in enumerate(values):
             ax.text(i, value+max(values)*.025, f'{value:.1f}\n{value/base:.2f}x', ha='center', fontsize=9)
-    fig.suptitle('A100 80GB | Qwen3-8B | one seed, one pass | eager')
+    fig.suptitle('A100 80GB | Qwen3-8B | one seed, one pass')
     fig.tight_layout()
     for ext in ['png', 'svg']:
         fig.savefig(out / f'throughput.{ext}', dpi=180)
     plt.close(fig)
     fig, axes = plt.subplots(1, 2, figsize=(11, 4.5))
     for ax, concurrency in zip(axes, [1, 32]):
-        bottom = np.zeros(4)
+        bottom = np.zeros(len(METHODS) - 1)
         for phase in PHASES:
             values = [phase_value(cells[(concurrency, m)], phase) or 0 for m in METHODS[1:]]
-            ax.bar(range(4), values, bottom=bottom, label=phase)
+            ax.bar(range(len(METHODS) - 1), values, bottom=bottom, label=phase)
             bottom += np.array(values)
-        ax.set_xticks(range(4), [LABELS[m] for m in METHODS[1:]])
+        ax.set_xticks(range(len(METHODS) - 1), [LABELS[m] for m in METHODS[1:]])
         ax.set_title(f'Concurrency {concurrency}')
         ax.set_ylabel('CUDA event elapsed us / committed decode token')
     axes[1].legend(fontsize=8)
@@ -126,8 +127,8 @@ def figures(run, cells, profiles, timeline):
     for ext in ['png', 'svg']:
         fig.savefig(out / f'phases.{ext}', dpi=180)
     plt.close(fig)
-    fig, axes = plt.subplots(5, 1, figsize=(11, 6.5), sharex=True)
-    for ax, method, color in zip(axes, METHODS, COLORS):
+    fig, axes = plt.subplots(len(COMPARISON_PROFILE_METHODS), 1, figsize=(11, 6.5), sharex=True)
+    for ax, method, color in zip(axes, COMPARISON_PROFILE_METHODS, COLORS):
         start, end, intervals = timeline[method]
         ax.broken_barh([(0, (end-start)/1000)], (0, 1), facecolors='#e5e7eb')
         ax.broken_barh([((a-start)/1000, (b-a)/1000) for a, b in intervals], (.1, .8), facecolors=color)
@@ -141,6 +142,11 @@ def figures(run, cells, profiles, timeline):
     fig.savefig(out / 'timeline.png', dpi=180)
     plt.close(fig)
 
+    for name in ('throughput', 'phases'):
+        path = out / f'{name}.svg'
+        lines = path.read_text(encoding='utf-8').splitlines()
+        path.write_text('\n'.join(line.rstrip() for line in lines) + '\n', encoding='utf-8')
+
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
@@ -153,6 +159,11 @@ def main():
         c = load(path)
         j, m = c['job'], c['metrics']
         cells[(j['concurrency'], j['method'])] = c
+    jetspec = load(run / 'data/jetspec.json')
+    for cell in jetspec['cells']:
+        job = cell['job']
+        method = 'jetspec_graph' if job['jetspec_cuda_graph'] else 'jetspec'
+        cells[(job['concurrency'], method)] = cell
     for concurrency in [1, 8, 32]:
         baseline = cells[(concurrency, 'none')]['wall_tok_s']
         for method in METHODS:
@@ -173,11 +184,18 @@ def main():
                 target_kv_peak_pct=100*m['peak_target_blocks']/m['target_block_capacity']))
     write_csv(run / 'metrics.csv', rows)
     profiles, timelines = {}, {}
-    for method in METHODS:
+    for method in COMPARISON_PROFILE_METHODS:
         profiles[method], timelines[method] = profile_summary(load(run / 'profiling' / method / 'trace.json.gz'))
         profiles[method]['method'] = method
         dump(run / 'profiling' / method / 'summary.json', profiles[method])
-    write_csv(run / 'profiling.csv', [{k:v for k,v in profiles[m].items() if k != 'top_kernels'} for m in METHODS])
+    for name, summary in jetspec['profiles'].items():
+        _, mode, concurrency = name.split('-')
+        label = f'JetSpec {mode} C={concurrency[1:]}'
+        profiles[label] = dict(summary, method=label)
+    write_csv(run / 'profiling.csv', [
+        {k: v for k, v in summary.items() if k not in ('top_kernels', 'status', 'cudaLaunchKernel', 'cudaGraphLaunch')}
+        for summary in profiles.values()
+    ])
     figures(run, cells, profiles, timelines)
     speed_table = table(['Method', 'C=1 tok/s (speedup)', 'C=8 tok/s (speedup)', 'C=32 tok/s (speedup)'],
         [[LABELS[method]] + [f"{cells[(c,method)]['wall_tok_s']:.2f} ({cells[(c,method)]['wall_tok_s']/cells[(c,'none')]['wall_tok_s']:.2f}x)" for c in [1,8,32]] for method in METHODS])
@@ -192,17 +210,17 @@ def main():
     phase_table = table(['C', 'Method'] + [f'{p} us/token' for p in PHASES],
         [[c, LABELS[m]] + ['N/A' if phase_value(cells[(c,m)], p) is None else f"{phase_value(cells[(c,m)], p):.2f}" for p in PHASES] for c in [1,32] for m in METHODS[1:]])
     profile_table = table(['Method', 'CPU steps', 'Window ms', 'Kernel launches', 'Kernel sum ms', 'Device interval union ms', 'Coverage %', 'Memcpy events', 'Host sync ms'],
-        [[LABELS[m], profiles[m]['captured_steps'], f"{profiles[m]['window_ms']:.2f}", profiles[m]['kernel_launches'],
+        [[LABELS.get(m, m), profiles[m]['captured_steps'], f"{profiles[m]['window_ms']:.2f}", profiles[m]['kernel_launches'],
           f"{profiles[m]['kernel_sum_ms']:.2f}", f"{profiles[m]['device_active_union_ms']:.2f}", f"{profiles[m]['device_activity_coverage_pct']:.2f}",
-          profiles[m]['memcpy_events'], f"{profiles[m]['host_sync_ms']:.2f}"] for m in METHODS])
+          profiles[m]['memcpy_events'], f"{profiles[m]['host_sync_ms']:.2f}"] for m in profiles])
     kernel_table = table(['Method', 'Top kernel (name shortened)', 'Calls', 'Kernel ms'],
-        [[LABELS[m], '`'+k['name'][:90].replace('|','/')+'`', k['calls'], f"{k['kernel_ms']:.2f}"] for m in METHODS for k in profiles[m]['top_kernels'][:3]])
+        [[LABELS.get(m, m), '`'+k['name'][:90].replace('|','/')+'`', k['calls'], f"{k['kernel_ms']:.2f}"] for m in profiles for k in profiles[m]['top_kernels'][:3]])
     models = load(Path('benchmarks/models.json'))
     model_table = table(['Role', 'Checkpoint', 'Revision'], [[role, v['repo'], '`'+v['revision']+'`'] for role,v in models.items()])
     tables = dict(speed=speed_table, infra=infra_table, algorithm=algorithm_table, phases=phase_table, profiles=profile_table, kernels=kernel_table, models=model_table)
     dump(run / 'tables.json', tables)
     (run / 'TABLES.md').write_text('\n\n'.join(['# Measured tables'] + [f'## {k}\n\n{v}' for k,v in tables.items()])+'\n', encoding='utf-8')
-    print('Built tables, CSV summaries and figures from 15 cells and 5 traces.')
+    print('Built tables, CSV summaries and figures from 18 cells and 8 profiles.')
 
 
 if __name__ == '__main__':

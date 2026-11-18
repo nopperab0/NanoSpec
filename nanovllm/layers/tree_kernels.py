@@ -21,16 +21,16 @@ def _build(Ids, Scores, Anchors, Tokens, Parents, Depths, Ancestors,
     bits = tl.where(i == 0, 1, 0).to(tl.uint64)
     expanded = tl.full((S,), False, tl.int1)
     count = 1
-    while count < N:
+    running = True
+    while (count < N) & running:
         eligible = (i < count) & ~expanded & (depths < DEPTH)
         best = tl.max(tl.where(eligible, score, -float('inf')), 0)
         parent = tl.min(tl.where(eligible & (score == best), i, S), 0)
-        if parent == S:
-            break
+        running = parent != S
         depth = tl.sum(tl.where(i == parent, depths, 0), 0)
         parent_bits = tl.sum(tl.where(i == parent, bits, 0), 0)
         rank = i - count
-        adding = (rank >= 0) & (rank < W) & (i < N)
+        adding = (rank >= 0) & (rank < W) & (i < N) & running
         offset = b * DEPTH * W + depth * W + rank
         new_token = tl.load(Ids + offset, adding, other=0)
         new_score = tl.load(Scores + offset, adding, other=0)
@@ -41,7 +41,7 @@ def _build(Ids, Scores, Anchors, Tokens, Parents, Depths, Ancestors,
         node_bits = parent_bits | (tl.full((S,), 1, tl.uint64) << i)
         bits = tl.where(adding, node_bits, bits)
         expanded = expanded | (i == parent)
-        count += W
+        count += tl.where(running, W, 0)
     tl.store(Tokens + b * N + i, tokens, i < N)
     tl.store(Parents + b * N + i, parents, i < N)
     tl.store(Depths + b * N + i, depths, i < N)

@@ -3,13 +3,7 @@
 A small teaching engine for speculative decoding on the original **nano-vLLM**.
 Select `none`, `naive`, `dflash`, `dspark`, or `jetspec` when constructing the engine.
 
-**Development:** a batched GPU JetSpec path and optional forward CUDA Graphs are implemented.
-CSF job **24877593** is queued; these changes are not yet GPU-validated. See
-[optimization design and switches](docs/JETSPEC_OPTIMIZATION.md). The historical tables below
-describe the serial reference backend in commit `2b62616`, not this new implementation.
-
-**Measured on one A100 80GB:** all 15 performance cells and five separate PyTorch profiles completed.
-The results compare these implementations under one controlled workload, with **one seed and one pass**.
+**Measured on one A100 80GB per job.** Each cell used one seed and one pass. JetSpec ran with batched Triton verification in eager and CUDA Graph modes. The other methods ran in eager mode on a separate A100 of the same model.
 
 [English report](reports/a100-20261118/RESULTS.md) · [中文报告](reports/a100-20261118/RESULTS.zh-CN.md) ·
 [All tables](reports/a100-20261118/TABLES.md) · [CSV](reports/a100-20261118/metrics.csv) ·
@@ -23,14 +17,15 @@ The results compare these implementations under one controlled workload, with **
 | Naive | 16.33 (0.50x) | 104.86 (0.45x) | 318.29 (0.40x) |
 | DFlash | 64.53 (1.99x) | 426.52 (1.83x) | 1092.74 (1.36x) |
 | DSpark | 65.12 (2.01x) | 424.92 (1.83x) | 1084.13 (1.35x) |
-| JetSpec | 60.10 (1.85x) | 60.93 (0.26x) | 62.03 (0.08x) |
+| JetSpec eager | 77.48 (2.39x) | 487.08 (2.09x) | 656.49 (0.82x) |
+| JetSpec graph | 185.89 (5.74x) | 636.31 (2.73x) | 709.31 (0.88x) |
 
 ![A100 throughput comparison](reports/a100-20261118/figures/throughput.png)
 
-Qwen3-8B BF16; 128 SPEED-Bench requests per cell; 256 output tokens ignoring EOS; eager execution;
+Qwen3-8B BF16; 128 SPEED-Bench requests per cell; 256 output tokens ignoring EOS;
 closed-loop concurrency 1/8/32; seed 29. Speedup is paired with the baseline at the same concurrency.
 These are single observations, not confidence intervals. DFlash and DSpark are close; Naive is slower here.
-JetSpec uses a simple per-request tree verifier, which limits its concurrent throughput.
+JetSpec leads at C=1 and C=8. DFlash and DSpark have higher throughput at C=32, where JetSpec verifies about ten positions per delivered token.
 
 ## Methods
 
@@ -83,7 +78,8 @@ finally:
 
 Naive additionally requires a separate `draft_kv_cache_memory_bytes` budget and uses `num_speculative_tokens`.
 Block7 heads fix the draft length at seven. JetSpec exposes `jetspec_tree_budget` and `jetspec_tree_width`.
-Method selection happens at engine construction, not per request.
+JetSpec uses batched Triton by default. Add `--jetspec-cuda-graph` to capture its draft and target forwards.
+See the [JetSpec configuration](docs/TUTORIAL.md#independent-jetspec-path) for switches and execution details.
 
 ## Benchmark and profiling
 
@@ -94,9 +90,8 @@ The workflow does not launch preflight experiments or correctness tests.
 - [Profiling guide](docs/PROFILING.md): traces, operators, phase event timing, and optional Nsight commands.
 - [Measured report](reports/a100-20261118/RESULTS.md): phase tables, kernel analysis and diagnostic timelines.
 
-GPU telemetry failed in this run; no measured power, hardware utilization, occupancy or HBM bandwidth is claimed.
-The exact frozen input panel was not included in the downloaded result archive; its hash and selection recipe are recorded.
-Do not substitute the shipped 16-prompt example panel and call it the measured workload.
+GPU telemetry failed in job 24846937; no measured power, hardware utilization, occupancy or HBM bandwidth is claimed.
+The reports record the frozen input panel hash. The exact panel is available in the CSF JetSpec result archive.
 
 ## Repository layout
 
