@@ -40,6 +40,8 @@ def engine_kwargs(job):
         options.update(num_speculative_tokens=job["naive_k"], draft_kv_cache_memory_bytes=job["draft_kv_bytes"])
     if method == "jetspec":
         options.update(jetspec_tree_width=job["tree_width"], jetspec_tree_budget=job["tree_budget"])
+        options.update(jetspec_backend=job.get("jetspec_backend", "triton"),
+                       jetspec_cuda_graph=job.get("jetspec_cuda_graph", False))
     return options
 
 

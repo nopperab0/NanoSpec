@@ -62,6 +62,9 @@ class Attention(nn.Module):
         if k_cache.numel() and v_cache.numel():
             store_kvcache(k, v, k_cache, v_cache, context.slot_mapping)
         if context.tree is not None:
+            if hasattr(context.tree, "block_tables"):
+                from nanovllm.layers.paged_tree_attention import paged_tree_attention
+                return paged_tree_attention(q, k_cache, v_cache, context.tree, self.scale)
             from nanovllm.layers.tree_attention import tree_attention
             return tree_attention(q, k_cache, v_cache, context.tree, self.scale)
         if context.is_prefill:

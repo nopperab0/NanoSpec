@@ -27,6 +27,8 @@ class Config:
     jetspec_tree_width: int = 4
     jetspec_tree_budget: int = 32              # includes the root/anchor
     jetspec_draft_shift: bool = False
+    jetspec_backend: str = "triton"           # "reference": serial SDPA; "triton": batched GPU trees
+    jetspec_cuda_graph: bool = False           # graph only JetSpec draft/target forwards, keep scheduler eager
     num_speculative_tokens: int = 0           # k: drafts proposed per round; >= 1 iff draft_model is set; DFlash: its block size
     draft_kv_cache_memory_bytes: int | None = None    # the model draft's KV budget; DFlash's KV mirrors the target's blocks
     seed: int | None = None                   # seed of the engine's sampling generator
@@ -85,13 +87,19 @@ class Config:
         if self.draft_type not in ("model", *BLOCK_DRAFTS, "jetspec"):
             raise ValueError(f"unknown draft_type {self.draft_type!r}")
         if self.draft_type == "jetspec":
+            if self.jetspec_backend not in ("reference", "triton"):
+                raise ValueError("jetspec_backend must be reference or triton")
+            if self.jetspec_cuda_graph and self.jetspec_backend != "triton":
+                raise ValueError("JetSpec CUDA Graphs require jetspec_backend='triton'")
+            if self.jetspec_backend == "triton" and self.jetspec_tree_budget > 64:
+                raise ValueError("GPU ancestor bitsets support at most 64 nodes; select reference for larger trees")
             draft = AutoConfig.from_pretrained(self.draft_model)
             if not getattr(draft, "dflash_config", {}).get("causal_head", False):
                 raise ValueError("JetSpec requires a trained causal head checkpoint")
             if self.jetspec_tree_budget < 2 or self.jetspec_tree_width < 1 or draft.block_size < 2:
                 raise ValueError("JetSpec requires budget >= 2, width >= 1 and block_size >= 2")
             if not self.enforce_eager:
-                raise ValueError("teaching JetSpec tree attention requires enforce_eager=True; compare all methods in eager mode")
+                raise ValueError("JetSpec uses enforce_eager=True for the ordinary engine; enable jetspec_cuda_graph for its forward graphs")
             reserve = max(self.jetspec_tree_budget - 1, draft.block_size - 1)
             if self.num_speculative_tokens not in (0, reserve):
                 raise ValueError("JetSpec reserves scratch slots from tree budget and checkpoint block size")

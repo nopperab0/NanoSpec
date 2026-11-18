@@ -154,6 +154,9 @@ def plan(args):
                     jobs[-1].update(load=load, num_requests=num_requests, arrival_rate=arrival_rate,
                         slo_ttft_ms=getattr(args, "slo_ttft_ms", 1000),
                         slo_tpot_ms=getattr(args, "slo_tpot_ms", 50), slo_gap_ms=getattr(args, "slo_gap_ms", 100))
+                    if method == "jetspec":
+                        jobs[-1].update(jetspec_backend=getattr(args, "jetspec_backend", "triton"),
+                            jetspec_cuda_graph=getattr(args, "jetspec_cuda_graph", False))
     random.Random(args.order_seed).shuffle(jobs)
     return jobs
 
@@ -237,6 +240,8 @@ def main():
     run.add_argument("--naive-k", type=int, default=7)
     run.add_argument("--tree-width", type=int, default=4)
     run.add_argument("--tree-budget", type=int, default=32)
+    run.add_argument("--jetspec-backend", choices=["reference", "triton"], default="triton")
+    run.add_argument("--jetspec-cuda-graph", action="store_true")
     run.add_argument("--max-tokens", type=int, default=128)
     run.add_argument("--temperature", type=float, default=0.7)
     run.add_argument("--top-k", type=int, default=20)

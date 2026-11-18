@@ -3,6 +3,11 @@
 A small teaching engine for speculative decoding on the original **nano-vLLM**.
 Select `none`, `naive`, `dflash`, `dspark`, or `jetspec` when constructing the engine.
 
+**Development:** a batched GPU JetSpec path and optional forward CUDA Graphs are implemented.
+CSF job **24877593** is queued; these changes are not yet GPU-validated. See
+[optimization design and switches](docs/JETSPEC_OPTIMIZATION.md). The historical tables below
+describe the serial reference backend in commit `2b62616`, not this new implementation.
+
 **Measured on one A100 80GB:** all 15 performance cells and five separate PyTorch profiles completed.
 The results compare these implementations under one controlled workload, with **one seed and one pass**.
 
@@ -35,7 +40,7 @@ JetSpec uses a simple per-request tree verifier, which limits its concurrent thr
 | `naive` | Independent Qwen3-0.6B | Chain with p/q rejection sampling | Sequential draft, batched target verification |
 | `dflash` | DeepSpec block7 head | Chain with rejection sampling | Parallel block proposal |
 | `dspark` | DeepSpec Markov block7 head | Corrected draft distribution | Sequential Markov correction |
-| `jetspec` | Original JetSpec causal head | Ancestor-masked candidate tree | Independent implementation; eager SDPA, one tree per request |
+| `jetspec` | Original JetSpec causal head | Ancestor-masked candidate tree | Batched paged Triton; optional forward graphs; serial SDPA reference retained |
 
 JetSpec's stochastic path uses target-distribution traversal, rather than reproducing the paper's
 non-greedy rejection protocol. This is **original JetSpec, not JetSpec++**, and is not an optimized official runtime.

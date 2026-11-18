@@ -10,6 +10,8 @@ def main():
     p.add_argument("--k", type=int, default=3, help="naive draft length")
     p.add_argument("--tree-budget", type=int, default=32)
     p.add_argument("--tree-width", type=int, default=4)
+    p.add_argument("--jetspec-backend", choices=["reference", "triton"], default="triton")
+    p.add_argument("--jetspec-cuda-graph", action="store_true")
     p.add_argument("--target-kv-gib", type=float, default=4)
     p.add_argument("--draft-kv-gib", type=float, default=1)
     p.add_argument("--max-tokens", type=int, default=128)
@@ -25,6 +27,7 @@ def main():
         kwargs.update(num_speculative_tokens=args.k, draft_kv_cache_memory_bytes=int(args.draft_kv_gib * (1 << 30)))
     if args.method == "jetspec":
         kwargs.update(jetspec_tree_budget=args.tree_budget, jetspec_tree_width=args.tree_width)
+        kwargs.update(jetspec_backend=args.jetspec_backend, jetspec_cuda_graph=args.jetspec_cuda_graph)
     llm = LLM(args.target, **kwargs)
     try:
         result = llm.generate([args.prompt], SamplingParams(temperature=args.temperature, max_tokens=args.max_tokens))

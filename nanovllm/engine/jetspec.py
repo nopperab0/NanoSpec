@@ -1,7 +1,8 @@
 """Independent JetSpec: causal parallel head, candidate tree, tree verify, KV gather.
 
-Teaching path: eager SDPA tree attention; one tree per request. It keeps nano's
-ordinary FlashAttention decode untouched. This is not the optimized JetSpec engine.
+The reference backend retains per-request eager SDPA. The Triton backend batches
+requests, builds and traverses trees on device and optionally graphs forwards.
+Nano's ordinary FlashAttention decode is unchanged.
 """
 import torch
 from transformers import AutoConfig
@@ -41,6 +42,10 @@ class JetSpecDecoder(SpeculativeDecoder):
             layer.self_attn.attn.v_cache = self.kv_cache[1, i]
         target.model.model.aux_layer_ids = self.head.aux_layer_ids
         self.aux_width = len(self.head.aux_layer_ids) * config.hf_config.hidden_size
+        self.batched = None
+        if config.jetspec_backend == "triton":
+            from nanovllm.engine.jetspec_batched import BatchedJetSpec
+            self.batched = BatchedJetSpec(self)
 
     def prefill_aux(self, seqs):
         return torch.empty(sum(s.num_scheduled_tokens for s in seqs), self.aux_width,
@@ -73,6 +78,8 @@ class JetSpecDecoder(SpeculativeDecoder):
 
     @torch.inference_mode()
     def run_round(self, seqs):
+        if self.batched is not None:
+            return self.batched.run_round(seqs)
         appended = []
         for seq in seqs:
             assert seq.num_cached_tokens == len(seq) - 1
@@ -119,4 +126,7 @@ class JetSpecDecoder(SpeculativeDecoder):
         # Release head KV and weights before the target process group is closed.
         self.graphs.clear()
         self.graph_vars.clear()
+        if self.batched is not None:
+            self.batched.close()
+            self.batched = None
         del self.head, self.kv_cache

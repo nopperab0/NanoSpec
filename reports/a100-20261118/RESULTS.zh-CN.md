@@ -203,8 +203,9 @@ Baseline 是本项目关闭投机后的路径，而不是另一个完全未修�
 下载包没有包含冻结面板及 metadata，当前仓库**尚不具备精确重放全部输入的完整材料**。
 `tools/prepare_panel.py` 保留选择规则，但声称精确重放前仍需从 CSF 下载原面板及 metadata；不能用附带的 16 条示例输入代替。
 
-每个 cell 都保留了测量时的引擎和 benchmark 哈希。发布的引擎未改动；提交作业后，benchmark CLI 默认 seed 改为 `[29]`，
+每个 cell 都保留了测量时的引擎和 benchmark 哈希。首次发布提交 `2b62616` 的引擎未改动；提交作业后，benchmark CLI 默认 seed 改为 `[29]`，
 而本轮 job 原本就显式指定 seed=29。文档、报告工具和通用环境入口在运行后整理过，所以测量哈希不表示所有发布文件都与运行时逐字相同。
+后续 JetSpec 优化属于独立修订，需要新的测量，不能把本历史报告的结果当成优化版结果。
 测量时的入口已归档为 [bench_spec.measured.py](environment/bench_spec.measured.py)：恢复原默认 seed 列表后，
 已核对其组合 benchmark 哈希与记录一致。这不改变本轮实际只有 seed=29，也不改变发布入口的单 seed 默认值。
 

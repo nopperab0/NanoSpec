@@ -66,6 +66,10 @@ class Profiler:
             self.wrap(obj, name, label)
         decoder = self.llm.speculative
         if decoder is not None:
+            batched = getattr(decoder, "batched", None)
+            if batched is not None:
+                for name in ("propose", "verify", "accept", "commit"):
+                    self.wrap(batched, name, "jetspec.batched_" + name)
             self.wrap(decoder, "run_round", "speculative.round")
             self.wrap(decoder, "verify_logits", "target.verify")
             self.wrap(decoder, "_propose", "jetspec.propose_tree")
@@ -91,7 +95,10 @@ class Profiler:
             torch.cuda.cudart().cudaProfilerStart()
         uuid = getattr(torch.cuda.get_device_properties(0), "uuid", None)
         if uuid is not None:
-            self.thread = threading.Thread(target=self.sample_gpu, args=(str(uuid),), daemon=True)
+            uuid = str(uuid)
+            if not uuid.startswith("GPU-"):
+                uuid = "GPU-" + uuid
+            self.thread = threading.Thread(target=self.sample_gpu, args=(uuid,), daemon=True)
             self.thread.start()
         else:
             self.thread = None

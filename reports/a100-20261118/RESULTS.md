@@ -220,10 +220,11 @@ everything needed for an exact input replay. `tools/prepare_panel.py` records th
 the original panel and its metadata from CSF is required before claiming exact replay. The 16-prompt example
 panel is a different workload.
 
-The engine source hash is preserved in every cell. The published engine is unchanged from the measured source;
+The engine source hash is preserved in every cell. The engine in the initial publication commit `2b62616` is unchanged from the measured source;
 the benchmark CLI default seeds were reduced to `[29]` after submission, while jobs explicitly used seed 29.
 Documentation, publication tooling and generic environment setup were edited after the run; the recorded
 benchmark source hash identifies the measured revision, not a claim that every published file was present then.
+Later JetSpec optimization revisions are separate from this historical report and require new measurements.
 The measured benchmark entry point is archived as [bench_spec.measured.py](environment/bench_spec.measured.py).
 It was reconstructed by restoring the original default seed list and verified against the recorded combined
 benchmark source hash; this does not add seeds to the measured jobs or the public CLI default.
